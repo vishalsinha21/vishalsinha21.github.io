@@ -14,84 +14,88 @@ Maven Integration
 Including Liquibase to Maven projects is pretty easy. Just follow below 2 steps:
 
 Step 1: Add below dependency to include liquibase jar
-<dependency>
-    <groupId>org.liquibase</groupId>
-    <artifactId>liquibase-core</artifactId>
-    <version>3.3.2</version>
-</dependency>
+
+
+    <dependency>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-core</artifactId>
+        <version>3.3.2</version>
+    </dependency>
+
 
 Step 2: To control liquibase via Maven plugin
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-maven-plugin</artifactId>
-            <version>3.3.2</version>
-            <configuration>
-                <changeLogFile>${basedir}/src/main/resources/liquibase/master.xml</changeLogFile>
-                <driver>org.apache.derby.jdbc.ClientDriver</driver>
-                <url>jdbc:derby://localhost:1527/message</url>
-                <username>app</username>
-                <password>app</password>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <changeLogFile>${basedir}/src/main/resources/liquibase/master.xml</changeLogFile>
+                    <driver>org.apache.derby.jdbc.ClientDriver</driver>
+                    <url>jdbc:derby://localhost:1527/message</url>
+                    <username>app</username>
+                    <password>app</password>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 changeLogFile element is to define the location of the master change log file which has ordered references of other change log files.
 
 Most frequently used goals:
 
 To execute your database changes:
-mvn liquibase:update
+    mvn liquibase:update
 
 To rollback changes with count parameter:
-mvn liquibase:rollback -Dliquibase.rollbackCount=n (rolls back last n change sets)
+    mvn liquibase:rollback -Dliquibase.rollbackCount=n (rolls back last n change sets)
 
 Project structure example:
 
 master.xml
 
-<?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <include file="changelog-create-employee-table.xml" relativeToChangelogFile="true"/>
-    <include file="changelog-add-employee-data.xml" relativeToChangelogFile="true"/>
-</databaseChangeLog>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+        <include file="changelog-create-employee-table.xml" relativeToChangelogFile="true"/>
+        <include file="changelog-add-employee-data.xml" relativeToChangelogFile="true"/>
+    </databaseChangeLog>
 
 Change set example (for adding employee table):
 
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet id="create_employee_table" author="sinhav">
-        <createTable tableName="Employee">
-            <column name="EmployeeId" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="FirstName" type="VARCHAR(50)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="LastName" type="varchar(50)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="Phone" type="varchar(50)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="JoiningDate" type="Date">
-                <constraints nullable="true"/>
-            </column>
-        </createTable>
-    </changeSet>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+        <changeSet id="create_employee_table" author="sinhav">
+            <createTable tableName="Employee">
+                <column name="EmployeeId" type="BIGINT">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="FirstName" type="VARCHAR(50)">
+                    <constraints nullable="true"/>
+                </column>
+                <column name="LastName" type="varchar(50)">
+                    <constraints nullable="true"/>
+                </column>
+                <column name="Phone" type="varchar(50)">
+                    <constraints nullable="true"/>
+                </column>
+                <column name="JoiningDate" type="Date">
+                    <constraints nullable="true"/>
+                </column>
+            </createTable>
+        </changeSet>
 
-    <changeSet id="add_pk_for_employee" author="sinhav">
-        <addPrimaryKey columnNames="EmployeeId"
-                      constraintName="pk_employee"
-                      tableName="Employee" />
-    </changeSet>
-</databaseChangeLog>
+        <changeSet id="add_pk_for_employee" author="sinhav">
+            <addPrimaryKey columnNames="EmployeeId"
+                          constraintName="pk_employee"
+                          tableName="Employee" />
+        </changeSet>
+    </databaseChangeLog>
 
 Executing liquibase for the first time will create 2 additional tables in Database: Databasechangelog and Databasechangeloglock
 
@@ -110,25 +114,25 @@ Combination of change set id and author name uniquely identifies a change set. C
 3. Pre-condition check for DDL statements:
 If you are inserting any data which relies on data of some other tables then take care to check it as a pre-condition to ensure your change set is executed successfully across all environments regardless of data discrepancy across environments. E.g.
 
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet id="insert-subcustomer" author="sinhav">
-        <preConditions onFail="MARK_RAN" onFailMessage="There is no customers data. Probably local test base. In other words - There is no problems.">
-            <sqlCheck expectedResult="1" >select count(1) from Customers where CustomerNumber = ‘1234567'</sqlCheck>
-        </preConditions>
-        <sql>
-            insert into SubCustomers(MasterCustomerId, SubCustomerNumber, SupplierName, ApiId)
-            values((select id from Customers where CustomerNumber = ‘1234567'), ‘11223344', ’VS Suppliers', ‘TPR871')
-        </sql>
-        <rollback>
-            <delete tableName="SubCustomers">
-                <where>SubCustomerNumber='11223344'</where>
-            </delete>
-        </rollback>
-    </changeSet>
-</databaseChangeLog>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+        <changeSet id="insert-subcustomer" author="sinhav">
+            <preConditions onFail="MARK_RAN" onFailMessage="There is no customers data. Probably local test base. In other words - There is no problems.">
+                <sqlCheck expectedResult="1" >select count(1) from Customers where CustomerNumber = ‘1234567'</sqlCheck>
+            </preConditions>
+            <sql>
+                insert into SubCustomers(MasterCustomerId, SubCustomerNumber, SupplierName, ApiId)
+                values((select id from Customers where CustomerNumber = ‘1234567'), ‘11223344', ’VS Suppliers', ‘TPR871')
+            </sql>
+            <rollback>
+                <delete tableName="SubCustomers">
+                    <where>SubCustomerNumber='11223344'</where>
+                </delete>
+            </rollback>
+        </changeSet>
+    </databaseChangeLog>
 
 4. Rollback Mechanism:
 Liquibase offers rollback for DDL statements but for all DML statement rollback has to be handled explicitly by developer. For example, the above change set of creating employee table will create one record in databasechangelog table for this change set. For rolling back this change, you can execute command mvn liquibase:rollback -Dliquibase.rollbackCount=1, this will delete table and will also remove change set record from databasechangelog table.
@@ -137,39 +141,39 @@ If you attempt to rollback a change set which has some DML statement then it wil
 
 Example of change set having DML statements along with rollback:
 
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet id="add_employee_data" author="sinhav">
-        <insert tableName="Employee">
-            <column name="EmployeeId" type="BIGINT" valueNumeric="1000001"/>
-            <column name="FirstName">Vishal</column>
-            <column name="LastName">Sinha</column>
-            <column name="Phone">+47 32324324</column>
-            <column name="JoiningDate" valueDate="2004-06-09"/>
-        </insert>
-        <insert tableName="Employee">
-            <column name="EmployeeId" type="BIGINT" valueNumeric="1000002"/>
-            <column name="FirstName">Nishant</column>
-            <column name="LastName">Varshney</column>
-            <column name="Phone">+91 9834249399</column>
-            <column name="JoiningDate" valueDate="2004-05-11"/>
-        </insert>
-        <insert tableName="Employee">
-            <column name="EmployeeId" type="BIGINT" valueNumeric="1000003"/>
-            <column name="FirstName">Rajat</column>
-            <column name="LastName">Sharma</column>
-            <column name="Phone">+91 8342342345</column>
-            <column name="JoiningDate" valueDate="2004-07-07"/>
-        </insert>
-        <rollback>
-            <sql>
-                delete from Employee where EmployeeId in (1000001, 1000002, 1000003)
-            </sql>
-        </rollback>
-    </changeSet>
-</databaseChangeLog>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+        <changeSet id="add_employee_data" author="sinhav">
+            <insert tableName="Employee">
+                <column name="EmployeeId" type="BIGINT" valueNumeric="1000001"/>
+                <column name="FirstName">Vishal</column>
+                <column name="LastName">Sinha</column>
+                <column name="Phone">+47 32324324</column>
+                <column name="JoiningDate" valueDate="2004-06-09"/>
+            </insert>
+            <insert tableName="Employee">
+                <column name="EmployeeId" type="BIGINT" valueNumeric="1000002"/>
+                <column name="FirstName">Nishant</column>
+                <column name="LastName">Varshney</column>
+                <column name="Phone">+91 9834249399</column>
+                <column name="JoiningDate" valueDate="2004-05-11"/>
+            </insert>
+            <insert tableName="Employee">
+                <column name="EmployeeId" type="BIGINT" valueNumeric="1000003"/>
+                <column name="FirstName">Rajat</column>
+                <column name="LastName">Sharma</column>
+                <column name="Phone">+91 8342342345</column>
+                <column name="JoiningDate" valueDate="2004-07-07"/>
+            </insert>
+            <rollback>
+                <sql>
+                    delete from Employee where EmployeeId in (1000001, 1000002, 1000003)
+                </sql>
+            </rollback>
+        </changeSet>
+    </databaseChangeLog>
 
 For complete reference:
 http://www.liquibase.org/

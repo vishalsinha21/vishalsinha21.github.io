@@ -56,6 +56,8 @@ To rollback changes with count parameter:
 
 Project structure example:
 
+![alt text](/img/project-structure.png "Project Structure")
+
 master.xml
 
 ```xml

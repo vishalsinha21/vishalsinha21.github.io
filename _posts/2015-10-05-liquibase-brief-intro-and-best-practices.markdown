@@ -33,7 +33,9 @@ Step 2: To control liquibase via Maven plugin
             <artifactId>liquibase-maven-plugin</artifactId>
             <version>3.3.2</version>
             <configuration>
-                <changeLogFile>${basedir}/src/main/resources/liquibase/master.xml</changeLogFile>
+                <changeLogFile>
+                ${basedir}/src/main/resources/liquibase/master.xml
+                </changeLogFile>
                 <driver>org.apache.derby.jdbc.ClientDriver</driver>
                 <url>jdbc:derby://localhost:1527/message</url>
                 <username>app</username>
@@ -62,8 +64,10 @@ master.xml
 
 ```xml
 <databaseChangeLog>
-    <include file="changelog-create-employee-table.xml" relativeToChangelogFile="true"/>
-    <include file="changelog-add-employee-data.xml" relativeToChangelogFile="true"/>
+    <include file="changelog-create-employee-table.xml" 
+        relativeToChangelogFile="true"/>
+    <include file="changelog-add-employee-data.xml" 
+        relativeToChangelogFile="true"/>
 </databaseChangeLog>
 ```
 
@@ -104,37 +108,42 @@ First is to track all executed change sets and second to provide locking mechani
 
 Best Practices:
 
-1. Organizing change logs:
+- Organizing change logs:
 As shown in the project structure above, select a directory to store all your change log files and define their sequence in master change log file. Liquibase suggests to organize these files by major version but working in a multi developer environment, I would recommend to skip version from file names to avoid conflicts arising to developers choosing same versions. Its better to choose a logical and explanatory name for these change log files which upon first look would give some idea about the type of database changes it contains. E.g.
 db.changelog-add-queued-messages-table.xml
 db.changelog-add-retry-column-to-queued-messages-table.xml
 
-2. Change set id and author name:
+- Change set id and author name:
 Combination of change set id and author name uniquely identifies a change set. Change set id should be logical and explanatory name and author name should easily identify the developer who created the change set.
 
-3. Pre-condition check for DDL statements:
+- Pre-condition check for DDL statements:
 If you are inserting any data which relies on data of some other tables then take care to check it as a pre-condition to ensure your change set is executed successfully across all environments regardless of data discrepancy across environments. E.g.
 
 ```xml
-<databaseChangeLog>
-    <changeSet id="insert-subcustomer" author="sinhav">
-        <preConditions onFail="MARK_RAN" onFailMessage="There is no customers data. Probably local test base. In other words - There is no problems.">
-            <sqlCheck expectedResult="1" >select count(1) from Customers where CustomerNumber = ‘1234567'</sqlCheck>
-        </preConditions>
-        <sql>
-            insert into SubCustomers(MasterCustomerId, SubCustomerNumber, SupplierName, ApiId)
-            values((select id from Customers where CustomerNumber = ‘1234567'), ‘11223344', ’VS Suppliers', ‘TPR871')
-        </sql>
-        <rollback>
-            <delete tableName="SubCustomers">
-                <where>SubCustomerNumber='11223344'</where>
-            </delete>
-        </rollback>
-    </changeSet>
-</databaseChangeLog>
+<changeSet id="insert-subcustomer" author="sinhav">
+    <preConditions onFail="MARK_RAN" 
+    onFailMessage="There is no customers data">
+        <sqlCheck expectedResult="1" >
+            select count(1)
+            from Customers
+            where CustomerNumber = ‘1234567'
+        </sqlCheck>
+    </preConditions>
+    <sql>
+        insert into SubCustomers(MasterCustomerId, SubCustomerNumber,
+        SupplierName, ApiId) values(
+        (select id from Customers where CustomerNumber = ‘1234567'),
+        ‘11223344', ’VS Suppliers', ‘TPR871')
+    </sql>
+    <rollback>
+        <delete tableName="SubCustomers">
+            <where>SubCustomerNumber='11223344'</where>
+        </delete>
+    </rollback>
+</changeSet>
 ```
 
-4. Rollback Mechanism:
+- Rollback Mechanism:
 Liquibase offers rollback for DDL statements but for all DML statement rollback has to be handled explicitly by developer. For example, the above change set of creating employee table will create one record in databasechangelog table for this change set. For rolling back this change, you can execute command mvn liquibase:rollback -Dliquibase.rollbackCount=1, this will delete table and will also remove change set record from databasechangelog table.
 
 If you attempt to rollback a change set which has some DML statement then it will result in liquibase.exception.RollbackImpossibleException so make sure that you handle this rollback for DML statement explicitly in the change sets. Its always a good practice to run liquibase and test that both migration and rollback of your change set works as expected and without any exceptions. You can also have empty rollback blocks in case you don’t want to take any action on rollback.
@@ -142,36 +151,35 @@ If you attempt to rollback a change set which has some DML statement then it wil
 Example of change set having DML statements along with rollback:
 
 ```xml
-<databaseChangeLog>
-    <changeSet id="add_employee_data" author="sinhav">
-        <insert tableName="Employee">
-            <column name="EmployeeId" type="BIGINT" valueNumeric="1000001"/>
-            <column name="FirstName">Vishal</column>
-            <column name="LastName">Sinha</column>
-            <column name="Phone">+47 32324324</column>
-            <column name="JoiningDate" valueDate="2004-06-09"/>
-        </insert>
-        <insert tableName="Employee">
-            <column name="EmployeeId" type="BIGINT" valueNumeric="1000002"/>
-            <column name="FirstName">Nishant</column>
-            <column name="LastName">Varshney</column>
-            <column name="Phone">+91 9834249399</column>
-            <column name="JoiningDate" valueDate="2004-05-11"/>
-        </insert>
-        <insert tableName="Employee">
-            <column name="EmployeeId" type="BIGINT" valueNumeric="1000003"/>
-            <column name="FirstName">Rajat</column>
-            <column name="LastName">Sharma</column>
-            <column name="Phone">+91 8342342345</column>
-            <column name="JoiningDate" valueDate="2004-07-07"/>
-        </insert>
-        <rollback>
-            <sql>
-                delete from Employee where EmployeeId in (1000001, 1000002, 1000003)
-            </sql>
-        </rollback>
-    </changeSet>
-</databaseChangeLog>
+<changeSet id="add_employee_data" author="sinhav">
+    <insert tableName="Employee">
+        <column name="EmployeeId" type="BIGINT" valueNumeric="10001"/>
+        <column name="FirstName">Vishal</column>
+        <column name="LastName">Sinha</column>
+        <column name="Phone">+47 32324324</column>
+        <column name="JoiningDate" valueDate="2004-06-09"/>
+    </insert>
+    <insert tableName="Employee">
+        <column name="EmployeeId" type="BIGINT" valueNumeric="10002"/>
+        <column name="FirstName">Nishant</column>
+        <column name="LastName">Varshney</column>
+        <column name="Phone">+91 9834249399</column>
+        <column name="JoiningDate" valueDate="2004-05-11"/>
+    </insert>
+    <insert tableName="Employee">
+        <column name="EmployeeId" type="BIGINT" valueNumeric="10003"/>
+        <column name="FirstName">Rajat</column>
+        <column name="LastName">Sharma</column>
+        <column name="Phone">+91 8342342345</column>
+        <column name="JoiningDate" valueDate="2004-07-07"/>
+    </insert>
+    <rollback>
+        <sql>
+            delete from Employee
+            where EmployeeId in (10001, 10002, 10003)
+        </sql>
+    </rollback>
+</changeSet>
 ```
 
 For complete reference:

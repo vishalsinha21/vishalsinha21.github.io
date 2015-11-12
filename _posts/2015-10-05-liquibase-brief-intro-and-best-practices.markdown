@@ -183,4 +183,5 @@ Example of change set having DML statements along with rollback:
 ```
 
 For complete reference:
-<http://www.liquibase.org/>
+
+<a href="http://www.liquibase.org/" target="_blank">http://www.liquibase.org/</a>

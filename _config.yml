@@ -2,7 +2,7 @@ excerpt_separator: ""
 pygments: true
 markdown: redcarpet
 url: http://vishalsinha21.github.io
-title: Explore
-tagline: A log of everyday life
-description: My awesome new site
+title: The Blog
+tagline: some of this and some of that
+description: Vishal Sinha's Blog
 paginate: 5

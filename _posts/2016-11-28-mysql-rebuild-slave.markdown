@@ -4,14 +4,15 @@ title: Mysql - rebuild slave from master
 layout: post
 ---
 
-Problem: Some times mysql master and slave go out of sync, this could happen due to various reasons like master stops writing to binary logs, duplicate entry exists in slave or some other insert/update constraint failure in slave (this could happen when slave database is not read only and some clients connects directly to slave). In such scenarios, the only way to bring back master and slave in sync is to rebuild slave from master. Below are tried and tested steps to rebuild slave from master where the master-slave setup already exists.
+Problem: Sometimes mysql master and slave go out of sync, this could happen due to various reasons like master stops writing to binary logs, duplicate entry exists in slave or some other insert/update constraint failure in slave (this could happen when slave database is not read only and some clients connects directly to slave). In such scenarios, the only way to bring back master and slave in sync is to rebuild slave from master. Below are tried and tested steps to rebuild slave from master where the master-slave setup already exists.
 
 Consider this scenario with master and slave server as given below:
 
 master/slave
 exdap211/exdap212
 
-Problem on slave:
+__**Problem on slave**__
+
 ```
 mysql> show slave status \G
 *************************** 1. row ***************************
@@ -72,15 +73,18 @@ Master_SSL_Verify_Server_Cert: No
 1 row in set (0.00 sec)
 ```
 
-Solution: Rebuild slave
+__**Solution: Rebuild slave**__
 
-On Master
+__On Master__
+
 - Login to mysql
+
 ```
 mysql -u root -p (you will be prompted for password)
 ```
 
 - Check master status
+
 ```
 mysql> show master status\G
 *************************** 1. row ***************************
@@ -93,12 +97,14 @@ Executed_Gtid_Set:
 ```
 
 - Reset master
+
 ```
 mysql> reset master;
 Query OK, 0 rows affected (1.40 sec)
 ```
 
 - Check master status again
+
 ```
 mysql> show master status\G
 *************************** 1. row ***************************
@@ -111,20 +117,23 @@ Executed_Gtid_Set:
 ```
 
 - Exit from mysql prompt and start taking dump of master. This will take some time depending on size of database
+
 ```
 bring@mysql2qa:~$ mysqldump -uroot -p --all-databases --master-data=1 --single-transaction --quick  > /tmp/dbdump.db
 Enter password:
 ```
 
 - Once completed, check the file to be sure
+
 ```
 ls -ltrh
 -rw-r--r--  1 bring    deploy   2.0G Mar 29 10:03 dbdump.db
 ```
 
-Done with steps on master, now login to slave
+__**Done with steps on master, now login to slave**__
 
-- scp dump file from master to slave
+- SCP dump file from master to slave
+
 ```
 scp user@exdap211:/var/db/backup/dbdump.db /var/db/backup/dbdump.db
 Are you sure you want to continue connecting (yes/no)? yes
@@ -133,23 +142,25 @@ dbdump.db                                                                       
 ```
 
 - Check the file to be sure
+
 ```
 -rw-r--r--  1 bring    deploy   2.0G Mar 29 10:08 dbdump.db
 ```
 
-- now login to mysql, stop slave and then reset slave and then exit
+- Now login to mysql, stop slave and then reset slave and then exit
+
 ```
 mysql> stop slave;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-mysql> reset slave;
 ```
+mysql> reset slave;
 Query OK, 0 rows affected (0.25 sec)
 ```
 
-mysql> show slave status \G
 ```
+mysql> show slave status \G
 *************************** 1. row ***************************
                Slave_IO_State:
                   Master_Host: exdap211.xyz.in

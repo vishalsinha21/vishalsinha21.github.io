@@ -13,7 +13,7 @@ exdap211/exdap212
 
 __**Problem on slave**__
 
-```
+```bash
 mysql> show slave status \G
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event
@@ -79,13 +79,13 @@ __On Master__
 
 - Login to mysql
 
-```
+```bash
 mysql -u root -p (you will be prompted for password)
 ```
 
 - Check master status
 
-```
+```bash
 mysql> show master status\G
 *************************** 1. row ***************************
              File: mysql-bin.000044
@@ -98,14 +98,14 @@ Executed_Gtid_Set:
 
 - Reset master
 
-```
+```bash
 mysql> reset master;
 Query OK, 0 rows affected (1.40 sec)
 ```
 
 - Check master status again
 
-```
+```bash
 mysql> show master status\G
 *************************** 1. row ***************************
              File: mysql-bin.000001
@@ -118,14 +118,14 @@ Executed_Gtid_Set:
 
 - Exit from mysql prompt and start taking dump of master. This will take some time depending on size of database
 
-```
+```bash
 bring@mysql2qa:~$ mysqldump -uroot -p --all-databases --master-data=1 --single-transaction --quick  > /tmp/dbdump.db
 Enter password:
 ```
 
 - Once completed, check the file to be sure
 
-```
+```bash
 ls -ltrh
 -rw-r--r--  1 bring    deploy   2.0G Mar 29 10:03 dbdump.db
 ```
@@ -134,7 +134,7 @@ __**Done with steps on master, now login to slave**__
 
 - SCP dump file from master to slave
 
-```
+```bash
 scp user@exdap211:/var/db/backup/dbdump.db /var/db/backup/dbdump.db
 Are you sure you want to continue connecting (yes/no)? yes
 Warning: Permanently added 'exdap211,139.114.173.205' (RSA) to the list of known hosts.
@@ -143,23 +143,23 @@ dbdump.db                                                                       
 
 - Check the file to be sure
 
-```
+```bash
 -rw-r--r--  1 bring    deploy   2.0G Mar 29 10:08 dbdump.db
 ```
 
 - Now login to mysql, stop slave and then reset slave and then exit
 
-```
+```bash
 mysql> stop slave;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-```
+```bash
 mysql> reset slave;
 Query OK, 0 rows affected (0.25 sec)
 ```
 
-```
+```bash
 mysql> show slave status \G
 *************************** 1. row ***************************
                Slave_IO_State:
@@ -222,19 +222,19 @@ mysql> exit
 
 - Rebuild slave from dump, this will again take some time
 
-```
+```bash
 bring@mysql1qa:/tmp$ mysql -uroot -p < /tmp/dbdump.db
 Enter password:
 ```
 
 - Now login to mysql again and start slave and check status
 
-```
+```bash
 mysql> start slave;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-```
+```bash
 mysql> show slave status \G
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event

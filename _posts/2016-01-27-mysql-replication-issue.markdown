@@ -13,7 +13,7 @@ These steps would help in resolving Mysql database replication issues arising ou
 
 - Check slave status. Example: `show slave status\G`. You might see something like this
 
-```
+```bash
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event
                   Master_Host: <master-server.com>
@@ -81,7 +81,7 @@ This might be happening because some application might be pointing to slave DB i
 
 - Most probably replication will start again and come back to normal. If it gets stuck again for same error for some other record then repeat same steps. In case there are many such entries then better to reset slave and start replication again. Check slave status again to confirm.
 
-```
+```bash
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event
                   Master_Host: <master-server.com>

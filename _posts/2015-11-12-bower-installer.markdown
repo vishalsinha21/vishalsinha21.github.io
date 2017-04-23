@@ -60,7 +60,7 @@ After Bower Installer, I had to make some changes to my bower.json
 
 Result: I found a very clean way to selectively choose the files that I need and move into my projects.
 
-```
+```bash
 src
 └── main
     └── webapp

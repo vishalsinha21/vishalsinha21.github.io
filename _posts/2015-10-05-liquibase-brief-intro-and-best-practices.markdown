@@ -15,17 +15,17 @@ Including Liquibase to Maven projects is pretty easy. Just follow below 2 steps:
 
 Step 1: Add below dependency to include liquibase jar
 
-```xml
+~~~ xml
 <dependency>
     <groupId>org.liquibase</groupId>
     <artifactId>liquibase-core</artifactId>
     <version>3.3.2</version>
 </dependency>
-```
+~~~
 
 Step 2: To control liquibase via Maven plugin
 
-```xml
+~~~ xml
 <build>
     <plugins>
         <plugin>
@@ -44,7 +44,7 @@ Step 2: To control liquibase via Maven plugin
         </plugin>
     </plugins>
 </build>
-```
+~~~
 
 changeLogFile element is to define the location of the master change log file which has ordered references of other change log files.
 
@@ -62,18 +62,18 @@ Project structure example:
 
 master.xml
 
-```xml
+~~~ xml
 <databaseChangeLog>
     <include file="changelog-create-employee-table.xml" 
         relativeToChangelogFile="true"/>
     <include file="changelog-add-employee-data.xml" 
         relativeToChangelogFile="true"/>
 </databaseChangeLog>
-```
+~~~
 
 Change set example (for adding employee table):
 
-```xml
+~~~ xml
 <databaseChangeLog>
     <changeSet id="create_employee_table" author="sinhav">
         <createTable tableName="Employee">
@@ -100,7 +100,7 @@ Change set example (for adding employee table):
                   tableName="Employee" />
     </changeSet>
 </databaseChangeLog>
-```
+~~~
 
 Executing liquibase for the first time will create 2 additional tables in Database: Databasechangelog and Databasechangeloglock
 
@@ -119,7 +119,7 @@ Combination of change set id and author name uniquely identifies a change set. C
 - Pre-condition check for DDL statements:
 If you are inserting any data which relies on data of some other tables then take care to check it as a pre-condition to ensure your change set is executed successfully across all environments regardless of data discrepancy across environments. E.g.
 
-```xml
+~~~ xml
 <changeSet id="insert-subcustomer" author="sinhav">
     <preConditions onFail="MARK_RAN" 
     onFailMessage="There is no customers data">
@@ -141,7 +141,7 @@ If you are inserting any data which relies on data of some other tables then tak
         </delete>
     </rollback>
 </changeSet>
-```
+~~~
 
 - Rollback Mechanism:
 Liquibase offers rollback for DDL statements but for all DML statement rollback has to be handled explicitly by developer. For example, the above change set of creating employee table will create one record in databasechangelog table for this change set. For rolling back this change, you can execute command mvn liquibase:rollback -Dliquibase.rollbackCount=1, this will delete table and will also remove change set record from databasechangelog table.
@@ -150,7 +150,7 @@ If you attempt to rollback a change set which has some DML statement then it wil
 
 Example of change set having DML statements along with rollback:
 
-```xml
+~~~ xml
 <changeSet id="add_employee_data" author="sinhav">
     <insert tableName="Employee">
         <column name="EmployeeId" type="BIGINT" valueNumeric="10001"/>
@@ -180,7 +180,7 @@ Example of change set having DML statements along with rollback:
         </sql>
     </rollback>
 </changeSet>
-```
+~~~
 
 For complete reference:
 

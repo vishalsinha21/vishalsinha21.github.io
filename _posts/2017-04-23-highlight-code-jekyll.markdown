@@ -10,11 +10,11 @@ This is where highlight.js came to rescue. There were other options and hacks bu
 
 - Only 1 step is needed. Add highlight js and css of the color scheme you want in the header page. Either you can add cdn url as shown below or copy it in your project and give local path. This will find and all highlight the code inside of _\<pre\>\<code\>_ tags
 
-```xml
+~~~ xml
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-```
+~~~
 
 - highlight.js provide many color schemes and all you have to do is choose the right css and refer its path.
 

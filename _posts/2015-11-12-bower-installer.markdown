@@ -9,7 +9,7 @@ This is where Bower Installer comes to rescue. I came across this project around
 
 Before Bower Installer, my bower.json used to look like this.
 
-```json
+~~~ json
 {
   "name": "explore-bower",
   "version": "0.0.1",
@@ -19,12 +19,12 @@ Before Bower Installer, my bower.json used to look like this.
     "jquery": "2.1.4",
     "bootstrap": "~3.3.5"
   }
-```
+~~~
 
 
 After Bower Installer, I had to make some changes to my bower.json
 
-```json
+~~~ json
 {
   "name": "explore-bower",
   "version": "0.0.1",
@@ -52,7 +52,7 @@ After Bower Installer, I had to make some changes to my bower.json
     }
   }
 }
-```
+~~~
 
 - `install` is the new section for bower installer
 - with `path` you can define the destination folder individually for css and js folder.
@@ -60,7 +60,7 @@ After Bower Installer, I had to make some changes to my bower.json
 
 Result: I found a very clean way to selectively choose the files that I need and move into my projects.
 
-```bash
+~~~ bash
 src
 └── main
     └── webapp
@@ -80,7 +80,7 @@ src
             │   └── require.js
             └── underscore
                 └── underscore.js
-```
+~~~
 
 The documentation of this project is very good, for complete reference and usage:
 

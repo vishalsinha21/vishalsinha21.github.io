@@ -1,6 +1,6 @@
 excerpt_separator: ""
 pygments: true
-markdown: redcarpet
+markdown: kramdown
 url: http://vishalsinha21.github.io
 title: The Blog
 tagline: some of this and some of that

@@ -11,9 +11,9 @@ Consider this scenario with master and slave server as given below:
 master/slave
 exdap211/exdap212
 
-__**Problem on slave**__
+###Problem on slave
 
-```bash
+~~~ bash
 mysql> show slave status \G
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event
@@ -71,21 +71,21 @@ Master_SSL_Verify_Server_Cert: No
             Executed_Gtid_Set:
                 Auto_Position: 0
 1 row in set (0.00 sec)
-```
+~~~
 
-__**Solution: Rebuild slave**__
+###Solution: Rebuild slave
 
 __On Master__
 
 - Login to mysql
 
-```bash
+~~~ bash
 mysql -u root -p (you will be prompted for password)
-```
+~~~
 
 - Check master status
 
-```bash
+~~~ bash
 mysql> show master status\G
 *************************** 1. row ***************************
              File: mysql-bin.000044
@@ -94,18 +94,18 @@ mysql> show master status\G
 Binlog_Ignore_DB:
 Executed_Gtid_Set:
 1 row in set (0.00 sec)
-```
+~~~
 
 - Reset master
 
-```bash
+~~~ bash
 mysql> reset master;
 Query OK, 0 rows affected (1.40 sec)
-```
+~~~
 
 - Check master status again
 
-```bash
+~~~ bash
 mysql> show master status\G
 *************************** 1. row ***************************
              File: mysql-bin.000001
@@ -114,52 +114,52 @@ mysql> show master status\G
 Binlog_Ignore_DB:
 Executed_Gtid_Set:
 1 row in set (0.00 sec)
-```
+~~~
 
 - Exit from mysql prompt and start taking dump of master. This will take some time depending on size of database
 
-```bash
+~~~ bash
 bring@mysql2qa:~$ mysqldump -uroot -p --all-databases --master-data=1 --single-transaction --quick  > /tmp/dbdump.db
 Enter password:
-```
+~~~
 
 - Once completed, check the file to be sure
 
-```bash
+~~~ bash
 ls -ltrh
 -rw-r--r--  1 bring    deploy   2.0G Mar 29 10:03 dbdump.db
-```
+~~~
 
-__**Done with steps on master, now login to slave**__
+###Done with steps on master, now login to slave
 
 - SCP dump file from master to slave
 
-```bash
+~~~ bash
 scp user@exdap211:/var/db/backup/dbdump.db /var/db/backup/dbdump.db
 Are you sure you want to continue connecting (yes/no)? yes
 Warning: Permanently added 'exdap211,139.114.173.205' (RSA) to the list of known hosts.
 dbdump.db                                                                                                                                       100% 1976MB 164.7MB/s   00:12
-```
+~~~
 
 - Check the file to be sure
 
-```bash
+~~~ bash
 -rw-r--r--  1 bring    deploy   2.0G Mar 29 10:08 dbdump.db
-```
+~~~
 
 - Now login to mysql, stop slave and then reset slave and then exit
 
-```bash
+~~~ bash
 mysql> stop slave;
 Query OK, 0 rows affected (0.00 sec)
-```
+~~~
 
-```bash
+~~~ bash
 mysql> reset slave;
 Query OK, 0 rows affected (0.25 sec)
-```
+~~~
 
-```bash
+~~~ bash
 mysql> show slave status \G
 *************************** 1. row ***************************
                Slave_IO_State:
@@ -218,23 +218,23 @@ Master_SSL_Verify_Server_Cert: No
                 Auto_Position: 0
 1 row in set (0.00 sec)
 mysql> exit
-```
+~~~
 
 - Rebuild slave from dump, this will again take some time
 
-```bash
+~~~ bash
 bring@mysql1qa:/tmp$ mysql -uroot -p < /tmp/dbdump.db
 Enter password:
-```
+~~~
 
 - Now login to mysql again and start slave and check status
 
-```bash
+~~~ bash
 mysql> start slave;
 Query OK, 0 rows affected (0.01 sec)
-```
+~~~
 
-```bash
+~~~ bash
 mysql> show slave status \G
 *************************** 1. row ***************************
                Slave_IO_State: Waiting for master to send event
@@ -292,6 +292,6 @@ Master_SSL_Verify_Server_Cert: No
             Executed_Gtid_Set:
                 Auto_Position: 0
 1 row in set (0.00 sec)
-```
+~~~
 
 

@@ -1,8 +1,8 @@
 excerpt_separator: ""
-pygments: true
+highlighter: pygments
 markdown: kramdown
 url: http://vishalsinha21.github.io
-title: The Blog
+title: My Notes
 tagline: some of this and some of that
 description: Vishal Sinha's Blog
 paginate: 5

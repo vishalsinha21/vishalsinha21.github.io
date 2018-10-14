@@ -1,68 +1,73 @@
 ---
 published: true
-title: Java Concurrency - CountDownLatch
+title: Longest Common Substring
 layout: post
 ---
+Given two strings X and Y, find the length of the longest common substring.
 
-- CountDownLatch is a very interesting class from java concurrent package. It allows one thread to wait for one or more threads to complete before it starts processing.
+Examples:
 
-- This can be super useful on java server side. The usage is pretty simple. You can initialize CountDownLatch with initial count and then decrement it in threads using `countDown()`. This will decrement the count by 1. Finally you can use `await()` in the thread which needs to await other threads processing before it starts its processing. It will wait until count becomes 0.
+Input : X = "GeeksforGeeks", Y = "GeeksQuiz"
 
-- Below is the example of CountDownLatch. We have initialized the count at 3 and decrement the count in 3 other threads. The main thread will wait for all 3 threads to complete before it starts processing.
+Output : 5 The longest common substring is "Geeks" and is of length 5.
+
+
+Input : X = "abcdxyz", y = "xyzabcd"
+
+Output : 4 The longest common substring is "abcd" and is of length 4.
 
 ~~~ java
-import java.util.concurrent.CountDownLatch;
 
-public class TestCountDownLatch {
+import java.util.Scanner;
+
+//URL: https://practice.geeksforgeeks.org/problems/longest-common-substring/0
+//Description: Given two strings ‘X’ and ‘Y’, find the length of the longest common substring.
+
+public class LongestCommonSubstring {
 
     public static void main(String[] args) {
-        CountDownLatch latch = new CountDownLatch(3);
-        Thread cacheService = new Thread(new Service(latch), "Cache Service");
-        Thread namingService = new Thread(new Service(latch), "Naming Service");
-        Thread validationService = new Thread(new Service(latch), "Validation Service");
 
-        cacheService.start();
-        namingService.start();
-        validationService.start();
+        Scanner scanner = new Scanner(System.in);
+        int testCases = scanner.nextInt();
 
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for (int i = 0; i < testCases; i++) {
+            int len1 = scanner.nextInt();
+            int len2 = scanner.nextInt();
+
+            String str1 = scanner.next();
+            String str2 = scanner.next();
+
+            System.out.println(getLongestCommonSubstringLength(str1, str2));
         }
 
-        System.out.println("All services are up!");
-    }
-}
-
-class Service implements Runnable {
-
-    private CountDownLatch latch;
-
-    public Service(CountDownLatch latch) {
-        this.latch = latch;
     }
 
-    @Override
-    public void run() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    //Logic: Length of the common string can maximum be length of the shortest string among two strings.
+    //So, first find shortest among 2 strings. Start with finding the shorter string in the longer string and if not found then find the longest substring (all) of the shorter string in the longer string. Repeat this until all substrings are covered.
+    public static int getLongestCommonSubstringLength(String str1, String str2) {
+        int length1 = str1.length();
+        int length2 = str2.length();
+
+        String shortString = length1 > length2 ? str2 : str1;
+        String longString = length1 > length2 ? str1 : str2;
+
+        int shortStringLength = shortString.length();
+        int maxLength = shortStringLength;
+
+        while (maxLength > 0) {
+
+            for (int i = 0; i + maxLength - 1 < shortStringLength; i++) {
+                if (longString.contains(shortString.substring(i, i + maxLength))) {
+                    System.out.println(shortString.substring(i, i + maxLength));
+                    return maxLength;
+                }
+            }
+
+            maxLength--;
         }
 
-        System.out.println(Thread.currentThread().getName() + " is up!");
-        latch.countDown();
+        return 0;
     }
+
 }
-~~~
-
-
-Output:
-
-~~~
-Validation Service is up!
-Cache Service is up!
-Naming Service is up!
-All services are up!
 ~~~

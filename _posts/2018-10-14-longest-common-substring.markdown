@@ -3,7 +3,10 @@ published: true
 title: Longest Common Substring
 layout: post
 ---
+Problem Statement:
 Given two strings X and Y, find the length of the longest common substring.
+
+Reference URL: [Longest Common Substring](https://practice.geeksforgeeks.org/problems/longest-common-substring/0)
 
 Examples:
 

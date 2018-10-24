@@ -1,5 +1,5 @@
 excerpt_separator: ""
-highlighter: pygments
+highlighter: rouge
 markdown: kramdown
 url: http://vishalsinha21.github.io
 title: My Notes

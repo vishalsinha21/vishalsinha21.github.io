@@ -1,0 +1,54 @@
+---
+published: true
+title: Hot to clear PSM 1
+layout: post
+---
+
+Recently, I cleared PSM 1 with 95% on first attempt, so I thought of sharing my experience and how I prepared for the same. Many thanks to everyone whose tips helped me. I am trying to share the summary of those tips and what worked for me.
+
+
+<h3>Preparation Material</h3>
+
+
+- <a href="https://www.scrumguides.org/scrum-guide.html" target="_blank">Scrum Guide</a>
+Scrum is the most important artifact. Get very very familiar with it. Each and every sentence is worth it's weight in gold. I read this around 10 times. Try to understand it really well.
+You can also try and create notes for it in Q&A format. I found that very useful way to learn and remember things.
+
+- <a href="https://www.scrum.org/resources/online-nexus-guide" target="_blank">Nexus Guide</a>  
+Nexus is about scaling scrum. You need to get familiar with this, at least to the level of clearing Nexus Open assessment.
+
+- <a href="https://www.scrum.org/resources/scrum-glossary" target="_blank">Scrum Glossary</a>  
+Few of the terms stated in glossary are not in Scrum Guide but shows up in actual exams like Burn Down Chart, Technical Debt etc
+
+Few more topics, which can be read in detail on Internet:
+
+- Burn Up/Down Charts
+- Cone of Uncertainty
+- Velocity
+- Technical Debt
+
+<h3>Assessments</h3>
+
+- <a href="https://www.scrum.org/open-assessments/scrum-open" target="_blank">Scrum Open</a>  
+- <a href="https://www.scrum.org/open-assessments/product-owner-open" target="_blank">Product Owner Open</a>  
+- <a href="https://www.scrum.org/open-assessments/scrum-developer-open" target="_blank">Scrum Developer Open</a>  
+- <a href="https://www.scrum.org/open-assessments/nexus-open" target="_blank">Nexus Open</a>  
+- <a href="http://mlapshin.com/index.php/scrum-quizzes/sm-learning-mode" target="_blank">Mikhail Lapshin Preparation Quiz</a>  
+
+Start with assessments first without going through any preparation material to see where you stand, and create a baseline for yourself.<br>
+Then go through the cycle of going through preparation material and then attempting these assessments to see how you are improving.<br>
+Your goal should be to get 100% in these assessments taking under 5 min for open assessments and under 20 min for Mikhail Lapshin preparation quiz. You should be able to get 100% scores consistently on multiple attempts.<br>
+Few of the questions from assessments do show up in the real assessments and since time is of essence, getting comfortable and quick with these questions would help you to get that extra edge and devote more attention to other questions.  
+
+
+<h3>About the real assessment</h3>
+
+- Find a quiet place and keep water, pen and notepad handy.  
+- Questions cannot be skipped without answering, so if you are not able to make up your mind about the answer then just note down the question number and come back to it later.
+- Better have a attempt at all questions first, marking the ones which needs to be revisited as that would bring in some comfort factor.
+- At the last question, dont hit finish too soon. Look for link to "display all answered questions" and scroll down to see all questions with their preview and numbers. Click on the one you want to revisit and then choose the best possible answer. Repeat this until you have done the same for all questions you wanted to revisit.
+- If you still get time then just re-check the questions you have answered. Utilize all the time you have and do not be in a hurry to hit the finish button.
+
+
+All the best!
+ 

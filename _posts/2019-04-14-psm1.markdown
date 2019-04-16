@@ -1,6 +1,6 @@
 ---
 published: true
-title: Hot to clear PSM 1
+title: How to clear PSM 1
 layout: post
 ---
 
@@ -11,7 +11,7 @@ Recently, I cleared PSM 1 with 95% on first attempt, so I thought of sharing my 
 
 
 - <a href="https://www.scrumguides.org/scrum-guide.html" target="_blank">Scrum Guide</a>
-Scrum is the most important artifact. Get very very familiar with it. Each and every sentence is worth it's weight in gold. I read this around 10 times. Try to understand it really well.
+Scrum Guide is the most important artifact. Get very, very familiar with it. Each and every sentence is worth it's weight in gold. I read this around 10 times. Try to understand it really well.
 You can also try and create notes for it in Q&A format. I found that very useful way to learn and remember things.
 
 - <a href="https://www.scrum.org/resources/online-nexus-guide" target="_blank">Nexus Guide</a>  

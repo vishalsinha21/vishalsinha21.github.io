@@ -1,0 +1,85 @@
+---
+published: true
+title: "How to prepare for AZ-900: Microsoft Azure fundamentals certification"
+layout: post
+---
+
+<h3>Certification Objectives</h3>
+
+As the name conveys, this certification is all about fundamentals. It helps as the stepping stone to establish the fundamentals of cloud services and how those services are provided by Azure.
+
+<a href="https://docs.microsoft.com/en-us/learn/certifications/exams/az-900" target="_blank">Main certification page with all details & skills measured</a>
+
+
+<h3>Is it good for me?</h3>
+
+Azure and AWS are leading cloud solution providers and any certification in this area would be a good career investment.
+
+It’s good for technical folks who are starting out their journey in Azure to get acquainted, to get the high level overview of Azure capabilities and get experience of the certification environment before appearing for advanced level Azure certifications.
+
+But this is even better for folks in non-technical roles working in pre-sales, sales and delivery. This helps in getting that "30000 foot view” of Azure, helps in understanding clients requirements better and add more weightage to your opinions/suggestions. In my humble opinion, it’s a must for managers of all levels if their account is handling Azure projects.
+
+This certification is not mandatory to appear for advanced level certifications but I would recommend it as the stepping stone and to get familiarity with certification environment. Advantages of certification is pretty subjective and depends on individuals perception. I like it because not only it helps in grasping the concepts but it also really helps me to focus on few details that I would ignore otherwise. And there is always a motivational boost if you clear any industry known certification.
+
+<h3>How to prepare</h3>
+
+* **AZ-900: Microsoft Azure Fundamentals Exam Prep -2020 Edition by Scott Duffy (Udemy)** <br/>
+3 hours concise course which covers all topics related to this certification. There are other lengthy courses on Udemy for AZ-900, but I found this course just to be of the right length and instructor explains all concepts in simple language. It also has 1 practice test of 50 questions.
+
+* **AZ-900: Microsoft Azure Fundamentals Original Practice Tests by Scott Duffy (Udemy)** <br/>
+3 practice tests of 50 questions each
+
+* <a href="https://docs.microsoft.com/en-us/learn/paths/azure-fundamentals/" target="_blank">Official learning path</a> <br/>
+This path includes exhaustive coverage of all topics, creating free account, gives walk-through of the portal and has some simple hands-on exercise. This should take 10-12 hours to complete.
+
+This should be enough to achieve the objectives of this certification. Go through course and material again until you feel comfortable with the fundamentals. If you are able to score consistently above 95% in all practice tests and complete a test under 20 minutes then you are more than ready.
+
+<h3>How to schedule for exam</h3>
+
+The link to schedule exam with Pearson Vue is on the main certification page. There is option to take it from exam center or online (home/office). It’s very important to check that your system meets the requirements to take the exam online, before scheduling one.
+
+All details related to online exams are <a href="https://docs.microsoft.com/en-us/learn/certifications/online-exams" target="_blank">here</a>
+
+Download OnVue software on your system and check-in to get acquainted with the check in process needed before exam. It can be done anytime and you can appear for one sample exam (1 random unrelated question).
+
+You will be redirected to Pearson Vue to accept terms & conditions, language and select date/time slot for exam. This exam costs USD 99.
+
+
+<h3>Exam experience</h3>
+
+Check in process requires you to take photos of yourself, your identification (passport/driving license) and the photos of the room from where you would be attempting this exam. You will be prompted if photos are too dark/bright or blurred and then you will have to retake and re-submit. I started check-in 20 minutes before the actual appointment time, and was comfortably done with check in 15 min.
+
+I waited for 5 minutes, and the exam started right on time. All other running applications would be closed and its very important that you remain visible from your laptop camera all the times and no one enters your room, else it might lead to termination.
+
+Total exam time is 90 minutes which includes 5 minutes for terms and conditions and 10 minutes for feedback on questions after exam.
+I got 32 questions to be completed in 60 minutes (this can vary), so don’t assume that you will get all 90 minutes for the exam.
+
+The passing score is 700. I was able to score 900 with the preparation I mentioned above. I was able to identify some topics which deserves more attention (mentioned in next section) and with little more focus on them you should be able to score even better.
+
+32 questions is bit misleading because many questions has sub-questions. Some questions were really short but some have multiple sub-questions. For example: some questions had 3 statements to choose yes/no, or multiple statements with drag and drop options. Drag and drop question mentions that each choice can be used 0 to n times, so be careful.
+
+60 minutes is still a lot of time for this exam. I was able to attempt all questions in 30 minutes, devoting ample amount of time to each question.
+
+
+<h3>Topics that deserves more attention</h3>
+
+Below topics deserves more attention to details and for removing any kind of ambiguity.
+
+Aspects applicable to free account<br/>
+Azure monitor vs Azure event hubs<br/>
+Availability zone vs availability set<br/>
+Azure advanced threat protection vs Azure premium identity protection<br/>
+Different support levels<br/>
+
+
+
+<h3>Summary</h3>
+
+It’s been 6 months since I have started working on Azure. The project has got me some experience on Terraform, Kubernetes, Helm and Azure DevOps, but preparing for this certification has given me a very good overview of the many Azure fundamentals, core services and capabilities. This helps in broadening your horizon when proposing cloud solutions to customers/clients, and also helps to get acquaintance for the more advanced level certifications on Azure.
+
+I did my research when preparing for this certification, and I think I took longer to prepare than I should have as I didn’t find all the information readily enough. I hope that sharing all this information at one place would help anyone aspiring to appear for this certification with just the right amount of preparation. I hope you will find this article useful and will do well in your exam. All the best!
+
+
+
+
+ 

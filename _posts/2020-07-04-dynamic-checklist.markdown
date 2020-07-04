@@ -4,8 +4,6 @@ title: "Dynamic checklist - Github action"
 layout: post
 ---
 
-# Dynamic checklist
-
 [Checkout this action on Github marketplace](https://github.com/marketplace/actions/dynamic-checklist)
 
 Tests are nice, but they are not written for everything, especially when few things seems obvious or like a best practice. 

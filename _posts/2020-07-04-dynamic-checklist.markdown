@@ -59,6 +59,7 @@ This action will analyze the diff of the pull request, and based on the diff and
 
 Example to configure it:
 
+{% raw %}
 ```yaml
 name: "Dynamic checklist"
 
@@ -81,9 +82,10 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
 ```
-
+{% endraw %}
 
 Here is one more example to configure it, and print the output (formatted checklist) of dynamic checklist action
+{% raw %}
 ```yaml
 name: "Dynamic checklist"
 
@@ -110,6 +112,7 @@ jobs:
 ```
 
 The path to mapping file is relative to your repo root directory. For example, if you keep your mapping.json file inside a checklist directory inside repo's root directory then configure path as show below:
+{% endraw %}
 
 ```yaml
         with:

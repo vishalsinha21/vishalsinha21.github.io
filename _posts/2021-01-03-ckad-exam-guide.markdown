@@ -1,4 +1,8 @@
-## CKAD Exam Guide
+---
+published: true
+title: "CKAD Exam Guide"
+layout: post
+---
 
 I cleared CKAD recently (Nov 2020) on my first attempt. It was the most challenging certification till date for me but an equally gratifying one. I read lot of blogs on how to prepare for CKAD and really grateful for the ones who shared their wisdom and experience, so now it’s time to do the same.
 

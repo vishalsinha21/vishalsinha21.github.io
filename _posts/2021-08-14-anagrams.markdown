@@ -1,0 +1,10 @@
+---
+published: true
+title: "Anagrams"
+layout: post
+---
+
+An anagram of a string is another string that contains the same characters, only the order of characters can be different. 
+For example, “abc” and “bac” are an anagram of each other. "abb" and "baa" are not anagrams of each other.
+
+<iframe src="https://www.codiva.io/em/p/d460bb7a-bd12-451b-9996-26b042753ffb" style="height: 600px; min-height: 420px; max-height: 90vh; width: 100%; overflow: hidden;"></iframe>
